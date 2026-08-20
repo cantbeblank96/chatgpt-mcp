@@ -12,9 +12,10 @@ Claude Code / Cursor / any MCP client.
 **把本机已登录的官方 ChatGPT Desktop（Ubuntu/Linux）变成 MCP Server**，
 供 Claude Code / Cursor / 任意 MCP Client 调用。
 
-> ⚠️ **PoC / 技术可行性验证**（`compliance_mode: poc_only`）。
-> 请勿用于绕过登录/MFA/限流或批量抓取；生产使用前请自行确认适用的 OpenAI 条款。
-> Not affiliated with OpenAI.
+> ⚠️ **Technical Validation PoC** (`compliance_mode: poc_only`).
+> Completed 100-round stability validation, but still considered experimental software.
+> Please do not use for bypassing login/MFA/rate limits or bulk scraping; confirm
+> applicable OpenAI terms separately before production use.
 
 ---
 
@@ -29,7 +30,7 @@ Claude Code / Cursor / any MCP client.
 - **Fresh-reply guarantee**: never returns a stale response (baseline fingerprint + new-message check)
 - Robust against GUI reality: message-list virtualization, user interference detection,
   rate-limit (429) banners, IME preedit interference — all handled
-- Battle-tested: **100-round stress run PASS**, chaos injection 4/4, unit tests 14/14
+- Battle-tested: **Stress-tested across 100 consecutive rounds (PASS); chaos scenarios 4/4 passed**, unit tests 14/14
 
 ## Architecture
 
@@ -116,7 +117,7 @@ npm run probe            # verify a11y access to the running app (needs GUI sess
 
 </details>
 
-Runnable examples: [`examples/`](examples/).
+Runnable examples: see [chatgpt-desktop-mcp/examples/](examples/) directory for configuration templates.
 
 ### 5. Use it
 
@@ -229,6 +230,7 @@ node tests/smoke/stress-100.mjs   # 100-round stress driver (segmented, resumabl
 
 Test reports (100-round acceptance, Phase 3 capability + injection) are kept
 locally; summary results live in [CHANGELOG.md](CHANGELOG.md).
+*Note: E2E tests require a running ChatGPT Desktop instance with accessibility enabled.*
 
 ## Security
 
@@ -266,6 +268,9 @@ locally; summary results live in [CHANGELOG.md](CHANGELOG.md).
 | Typing/paste appears to fail | IME in Chinese mode swallows synthetic keys (preedit). Fixed in v0.1.0 via an Escape pre-clear; keep the app window unobstructed |
 | `USER_INTERFERENCE_DETECTED` | You interacted with the app mid-flight — retry after the app settles |
 | `RATE_LIMITED` | OpenAI throttling — wait and slow down your request cadence |
+| **probe fails / timeouts** | App not started with `--force-renderer-accessibility`; or session is Wayland (X11 required) — check with `echo $XDG_SESSION_TYPE` |
+| **clipboard not restored** | In rare cases may need manual intervention; verify clipboard history |
+| **gitignore 中仍含 artifacts/** | artifacts/ 探测证据本地保留；确认 `.gitignore` 已加入 `artifacts/`
 
 ## Repository Layout
 

@@ -2,12 +2,8 @@
   "mcpServers": {
     "chatgpt-desktop": {
       "command": "node",
-      "args": [
-        "/absolute/path/to/chatgpt-desktop-mcp/dist/main.js"
-      ],
-      "env": {
-        "CDGMCP_LOG_LEVEL": "info"
-      }
+      "args": ["/absolute/path/to/chatgpt-desktop-mcp/dist/main.js"],
+      "env": {"CDGMCP_LOG_LEVEL": "info"}
     }
   }
 }
