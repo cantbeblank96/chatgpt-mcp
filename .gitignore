@@ -1,0 +1,19 @@
+# dependencies / build output
+node_modules/
+dist/
+
+# logs
+*.log
+
+# heavy Phase 0 probe artifacts (kept locally, not in git)
+artifacts/probe/**/app-strings.txt
+artifacts/probe/**/tmp-profile/
+artifacts/probe/**/node_modules/
+artifacts/probe/**/*.png
+
+# MCP local state
+.local-state/
+__pycache__/
+*.pyc
+artifacts/
+notes/for_test/
