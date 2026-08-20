@@ -2,11 +2,11 @@
   "name": "chatgpt-desktop-mcp",
   "version": "0.1.0",
   "description": "MCP server exposing the official ChatGPT Desktop (Ubuntu) Chat surface as tools via AT-SPI",
-  "type": "module",
-  "license": "MIT",
+  "main": "dist/main.js",
   "bin": {
-    "chatgpt-desktop-mcp": "./dist/main.js"
+    "chatgpt-desktop-mcp": "dist/main.js"
   },
+  "type": "module",
   "scripts": {
     "build": "tsc -p tsconfig.json && npm run copy:python",
     "copy:python": "mkdir -p dist/adapters/atspi/python && cp src/adapters/atspi/python/*.py dist/adapters/atspi/python/",
